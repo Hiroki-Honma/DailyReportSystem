@@ -63,7 +63,7 @@ public class EmployeeValidator {
                 return "入力された社員番号はすでに存在しています。" ;
             }
         }
-        return null;
+        return "";
     }
 
 
