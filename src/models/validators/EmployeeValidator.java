@@ -23,17 +23,17 @@ public class EmployeeValidator {
         }
 
         String password_error = validatePassword(e.getPassword(), passwordCheckFlag);
-        if(!name_error.equals("")){
+        if(!password_error.equals("")){
             errors.add(password_error);
         }
 
         return errors;
     }
 
-    //パスワードの必須入力チェック
+ // パスワードの必須入力チェック
     private static String validatePassword(String password, Boolean passwordCheckFlag) {
-        //パスワードを変更する場合のみ実行
-        if(passwordCheckFlag && (password == null || password.equals(""))){
+        // パスワードを変更する場合のみ実行
+        if(passwordCheckFlag && (password == null || password.equals(""))) {
             return "パスワードを入力してください。";
         }
         return "";
