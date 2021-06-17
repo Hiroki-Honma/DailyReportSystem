@@ -16,6 +16,7 @@
                     <th class="report_date">日付</th>
                     <th class="report_title">タイトル</th>
                     <th class="report_action">操作</th>
+                    <th class="report_yoine">いいね</th>
                 </tr>
                 <c:forEach var="report" items="${reports}" varStatus="status">
                     <tr class="row${status.count % 2}">
@@ -23,6 +24,7 @@
                         <td class="report_date"><fmt:formatDate value='${report.report_date}' pattern='yyyy-MM-dd' /></td>
                         <td class="report_title">${report.title}</td>
                         <td class="report_action"><a href="<c:url value='/reports/show?id=${report.id}' />">詳細を見る</a></td>
+                        <td class="yoine"><a href="<c:url value='/reports/index?action=yoine&id=${report.id}&page=${page}' />">いいね!${report.yoineCount}</a></td>
                     </tr>
                 </c:forEach>
             </tbody>

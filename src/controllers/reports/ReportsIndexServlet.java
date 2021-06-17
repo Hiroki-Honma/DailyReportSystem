@@ -44,12 +44,36 @@ public class ReportsIndexServlet extends HttpServlet {
         }
 
         List<Report> reports = em.createNamedQuery("getAllReports", Report.class)
-                                  .setFirstResult(15 * (page - 1))
-                                  .setMaxResults(15)
-                                  .getResultList();
+                .setFirstResult(15 * (page - 1))
+                .setMaxResults(15)
+                .getResultList();
 
         long reports_count = (long)em.createNamedQuery("getReportsCount", Long.class)
-                                     .getSingleResult();
+                   .getSingleResult();
+
+      //リクエストパラメーターの取得
+        String yoine = request.getParameter("action");
+      //いいねボタンを押されたら
+        if(yoine != null){
+            Report r = (Report) em.createNamedQuery("getReport", Report.class)
+                    .setParameter("id" , Integer.parseInt(request.getParameter("id")))
+                    .getSingleResult();
+
+            // YoineLogicでいいねを加算
+            YoineLogic yl = new YoineLogic();
+            yl.yoinePlus(r);
+
+            //そのレポートのページ数をpageに代入
+            int id =r.getId();
+            page = (int) (((reports_count - id)/15) + 1);
+
+            em.getTransaction().begin();
+            em.persist(r);
+            em.getTransaction().commit();
+
+        }
+
+
 
         em.close();
 

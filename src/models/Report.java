@@ -32,6 +32,10 @@ import javax.persistence.Table;
     @NamedQuery(
             name = "getMyReportsCount" ,
             query = "SELECT COUNT(r) FROM Report AS r WHERE r.employee = :employee"
+    ),
+    @NamedQuery(
+            name = "getReport" ,
+            query = "SELECT r FROM Report AS r WHERE r.id = :id"
     )
 })
 @Entity
@@ -60,6 +64,9 @@ public class Report {
 
     @Column(name = "updated_at", nullable = false)
     private Timestamp updated_at;
+
+    @Column(name = "yoineCount")
+    private Integer yoineCount = 0;
 
     public Integer getId() {
         return id;
@@ -115,5 +122,13 @@ public class Report {
 
     public void setUpdated_at(Timestamp updated_at) {
         this.updated_at = updated_at;
+    }
+
+    public void setYoineCount(Integer yoineCount){
+        this.yoineCount = yoineCount;
+    }
+
+    public Integer getYoineCount() {
+        return yoineCount;
     }
 }
